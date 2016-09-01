@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>to-Do list test</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="new.css">
+    <script src="new.js"></script>
+    <article class="container col-xs-12" ng-app="toDoListApp">
+  <header class="row">
+    <h4 class="jumbotron">To-Do List Test </h4>
+  </header>
+  <section class="row" ng-controller="toDoController as toDoCtrl">
+    <div class="col-xs-12">
+      <!--this is the form-->
+      <aside class="col-xs-4">
+        <form name="toDoMainForm" ng-submit="toDoCtrl.submitForm(toDoCtrl.todoForm)">
+          <!--id field-->
+          <div class="form-group">
+            <label for="id">ID:</label>
+            <span id="id"><strong ng-bind="toDoCtrl.todoForm.id"></strong></span>
+          </div>
+          <!--Subject field-->
+          <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" class="form-control" id="subject" ng-model="toDoCtrl.todoForm.subject" placeholder="Enter some subject"/>
+          </div>
+          <!--isCompleted field-->
+          <div class="form-group">
+            <label for="isCompleted">isCompleted:</label>
+            <input type="checkbox" id="isCompleted" value="{{toDoCtrl.todoForm.isCompleted}}" ng-model="toDoCtrl.todoForm.isCompleted"/>
+               <label for="isPending">isPending:</label>
+              <input type="checkbox" id="ispending" value="{{toDoCtrl.todoForm.ispending}}" ng-model="toDoCtrl.todoForm.ispending"/>
+          </div>
+          <!--add field-->
+          <button type="submit" class="btn btn-default">Add to Table</button>
+        </form>
+      </aside>
+      <!--this is the table-->
+      <div class="col-xs-8 results">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Subject</td>
+              <td>Completed?</td>
+                <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in toDoCtrl.tableRow">
+              <td ng-bind="row.id"></td>
+              <td ng-bind="row.subject"></td>
+              <td ng-bind="row.isCompleted"></td>
+              <td>
+                <a href="#" class="btn btn-danger" ng-click="toDoCtrl.removeCurrent($event,$index)">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <footer class="row"></footer>
+</article>
+</html>
